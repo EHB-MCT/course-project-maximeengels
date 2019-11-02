@@ -14,8 +14,8 @@
 
     <br>
     <h2>Tutorial - Full stack webapp with NodeJS</h2>
-    <button type="button" class="btn btn-primary" id="list">List of books</button>
-    <button type="button" class="btn btn-secondary" id="form">Insert Book</button>
+    <button type="button" class="btn btn-primary" id="list">List of Images</button>
+    <button type="button" class="btn btn-secondary" id="form">Insert Image Metadata</button>
     <hr>
     <form>
         <div class="form-group">
@@ -23,16 +23,12 @@
             <input type="text" class="form-control" id="titelinput" name="titel">
         </div>
         <div class="form-group">
-            <label for="auteurinput">Auteur</label>
+            <label for="auteurinput">Descriptie</label>
             <input type="text" class="form-control" id="auteurinput" name="auteur">
         </div>
         <div class="form-group">
-            <label for="prijsinput">Prijs</label>
-            <input type="number" class="form-control" id="prijsinput" name="prijs" step=".01">
-        </div>
-        <div class="form-group">
-            <label for="uitgeverijinput">Uitgeverij</label>
-            <input type="text" class="form-control" id="uitgeverijinput" name="uitgeverij">
+            <label for="prijsinput">Rating</label>
+            <input type="number" class="form-control" id="prijsinput" name="rating" step=".1">
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -42,10 +38,6 @@
 <!--        list comes here...-->
 
     </div>
-
-    <!--    Zorg voor de knoppen functionaliteit:-->
-    <!--        - List of books: toon de div en verberg het formulier-->
-    <!--        - Insert book: toon het formulier en verberg de div-->
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"

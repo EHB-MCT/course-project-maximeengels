@@ -21,7 +21,7 @@ $(function(){
     function getList(){
 
         $.ajax({
-            url: 'http://127.0.0.1:3000/getBooks',
+            url: 'http://localhost:3000/getBooks',
             method: 'GET',
             dataType: 'json'
         }).done(function(data){

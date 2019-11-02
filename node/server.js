@@ -1,17 +1,17 @@
 const express = require('express');
-const mysql = require('mysql2');
-const config = require('./config');
+// const mysql = require('mysql2');
+// const config = require('./config');
 const path = require('path');
 const app = express();
-const port = 5500;
+const port = 3000;
 
-//Connection to database
-const connection = mysql.createConnection({
-    host: config.host,
-    user: config.user,
-    password: config.password,
-    database: config.database
-});
+// //Connection to database
+// const connection = mysql.createConnection({
+//     host: config.host,
+//     user: config.user,
+//     password: config.password,
+//     database: config.database
+// });
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
