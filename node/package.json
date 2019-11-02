@@ -1,0 +1,16 @@
+{
+  "name": "tutorial-fullstack-js-node",
+  "version": "1.0.0",
+  "description": "Basic webserver for GET and POST requests",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Mike Derycke",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mysql2": "^1.6.5"
+  }
+}
