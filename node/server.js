@@ -1,9 +1,12 @@
 const express = require('express');
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
+
+// Database connection setup
 const user = "MongoDBWeb2009";
 const password = 18495236;
 const dbName = user;
+
 const path = require('path');
 const app = express();
 const port = 3000;
@@ -26,11 +29,12 @@ app.get('/', (req, res) => {
 
 //GET getBooks
 app.get('/getBooks', (req, res) => {
-    connection.query(
-        'SELECT * FROM `Boek`',
-        function(err, results, fields) {
+    const db = client.db(dbName);
+    const collection = db.collection('favo-images');
+    collection.find({}).toArray(
+        function(err, results) {
             if(results){
-                // console.log(results);
+                console.log(results);
                 res.send(results);
             }
         }
