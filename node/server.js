@@ -89,18 +89,21 @@ const insertDocuments = function (db, callback) {
     });
 }
 
-app.get('/insertImage', (req, res) => {
+app.post('/insertImage', (req, res) => {
     console.log('insert triggered!');
     console.log(req.body);
+    
     const db = client.db(dbName);
     const collection = db.collection('favo-images');
-    collection.find({}).toArray(
-        [req.body.title, req.body.description, req.body.rating],
-        function(err, results){
-            console.log(results);
-            console.log(err);
-        }
-    );
+
+    collection.insertMany([req.body]);
+    // // collection.find({}).toArray(
+    // //     [req.body.title, req.body.description, req.body.rating],
+    // //     function(err, results){
+    // //         console.log(results);
+    // //         console.log(err);
+    // //     }
+    // // );
     res.send('OK');
 });
 
