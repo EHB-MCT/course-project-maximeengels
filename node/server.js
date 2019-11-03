@@ -1,17 +1,16 @@
 const express = require('express');
-// const mysql = require('mysql2');
-// const config = require('./config');
+const MongoClient = require('mongodb').MongoClient;
+const assert = require('assert');
+const user = "MongoDBWeb2009";
+const password = 18495236;
+const dbName = user;
 const path = require('path');
 const app = express();
 const port = 3000;
 
-// //Connection to database
-// const connection = mysql.createConnection({
-//     host: config.host,
-//     user: config.user,
-//     password: config.password,
-//     database: config.database
-// });
+// Connection URL
+const url = `mongodb://${user}:${password}@172.20.0.54:27017/?authMechanism=DEFAULT&authSource=${user}`;
+const client = new MongoClient(url);
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -38,6 +37,46 @@ app.get('/getBooks', (req, res) => {
     );
 });
 
+
+client.connect(function (err) {
+    assert.equal(null, err);
+    console.log("Connected successfully to server");
+    const db = client.db(dbName);
+    insertDocuments(db, function () {
+        const findDocuments = function (db, callback) {
+            // Get the documents collection
+            const collection = db.collection('favo-images');
+            // Find some documents
+            collection.find({}).toArray(function (err, docs) {
+                assert.equal(err, null);
+                console.log("Found the following records");
+                console.log(docs)
+                callback(docs);
+            });
+            client.close();
+        }
+    });
+});
+
+
+const insertDocuments = function (db, callback) {
+    // Get the documents collection
+    const collection = db.collection('favo-images');
+    // Insert some documents
+    collection.insertMany([{
+        title: "Astronaut",
+        description: "A cool photo about an astronaut.",
+        rating: 4
+    }, {
+        title: "Wormhole",
+        description: "Nice wormhole picture!",
+        rating: 5
+    }], function (err, result) {
+        console.log("Inserted 2 documents into the collection");
+        console.log(result);
+        callback(result);
+    });
+}
 
 // Toon de resultaten in de browser
 // door een nieuwe get route aan te maken: /getBooks
