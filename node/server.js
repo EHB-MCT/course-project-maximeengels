@@ -1,6 +1,7 @@
 const express = require('express');
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
+const bodyParser = require('body-parser');
 
 // Database connection setup
 const user = "MongoDBWeb2009";
@@ -15,11 +16,17 @@ const port = 3000;
 const url = `mongodb://${user}:${password}@172.20.0.54:27017/?authMechanism=DEFAULT&authSource=${user}`;
 const client = new MongoClient(url);
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
+
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
+
+app.use(bodyParser.json());
 
 
 //Localhost url
@@ -27,13 +34,13 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname + '/html/help.html'));
 });
 
-//GET getBooks
-app.get('/getBooks', (req, res) => {
+//GET getImages
+app.get('/getImages', (req, res) => {
     const db = client.db(dbName);
     const collection = db.collection('favo-images');
     collection.find({}).toArray(
-        function(err, results) {
-            if(results){
+        function (err, results) {
+            if (results) {
                 console.log(results);
                 res.send(results);
             }
@@ -82,13 +89,21 @@ const insertDocuments = function (db, callback) {
     });
 }
 
-// Toon de resultaten in de browser
-// door een nieuwe get route aan te maken: /getBooks
-
+app.get('/insertImage', (req, res) => {
+    console.log('insert triggered!');
+    console.log(req.body);
+    const db = client.db(dbName);
+    const collection = db.collection('favo-images');
+    collection.find({}).toArray(
+        [req.body.title, req.body.description, req.body.rating],
+        function(err, results){
+            console.log(results);
+            console.log(err);
+        }
+    );
+    res.send('OK');
+});
 
 
 app.listen(port, () => console.log(
     `MY App listening on port ${port}!`));
-
-
-

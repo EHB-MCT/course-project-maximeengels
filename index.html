@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>CosmoSearch</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -13,28 +13,30 @@
 <div class="container">
 
     <br>
-    <h2>Tutorial - Full stack webapp with NodeJS</h2>
+    <h2>CosmoSearch</h2>
+    <h5>Find your star!</h5>
+    <br>
     <button type="button" class="btn btn-primary" id="list">List of Images</button>
     <button type="button" class="btn btn-secondary" id="form">Insert Image Metadata</button>
     <hr>
     <form>
         <div class="form-group">
-            <label for="titelinput">Titel</label>
+            <label for="titelinput">Title</label>
             <input type="text" class="form-control" id="titelinput" name="titel">
         </div>
         <div class="form-group">
-            <label for="auteurinput">Descriptie</label>
-            <input type="text" class="form-control" id="auteurinput" name="auteur">
+            <label for="beschrijvinginput">Description</label>
+            <input type="text" class="form-control" id="beschrijvinginput" name="auteur">
         </div>
         <div class="form-group">
-            <label for="prijsinput">Rating</label>
-            <input type="number" class="form-control" id="prijsinput" name="rating" step=".1">
+            <label for="ratinginput">Rating</label>
+            <input type="number" class="form-control" id="ratinginput" name="rating" step=".1">
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
-    <div id="listOfBooks">
+    <div id="listOfImages">
 <!--        list comes here...-->
 
     </div>

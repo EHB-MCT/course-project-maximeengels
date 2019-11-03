@@ -1,42 +1,74 @@
-$(function(){
+$(function () {
     console.log('linked');
     //default setup
     $('form').hide();
-    $('#listOfBooks').show();
+    $('#listOfImages').show();
     getList();
 
 
     //Eventlisteners voor buttons
-    $('#list').click(function(){
+    $('#list').click(function () {
         $('form').hide();
-        $('#listOfBooks').show();
+        $('#listOfImages').show();
         getList();
     });
-    $('#form').click(function(){
+    $('#form').click(function () {
         $('form').show();
-        $('#listOfBooks').hide();
+        $('#listOfImages').hide();
     });
 
 
-    function getList(){
+    function getList() {
 
         $.ajax({
-            url: 'http://localhost:3000/getBooks',
+            url: 'http://127.0.0.1:3000/getImages',
             method: 'GET',
             dataType: 'json'
-        }).done(function(data){
+        }).done(function (data) {
             console.log('DONE');
-            for(let b of data){
-                $('#listOfBooks').append(`<strong>Titel: </strong> ${b.titel} <br>`);
+            $('#listOfImages').empty();
+            for (let b of data) {
+                $('#listOfImages').append(`<strong>Titel: </strong> ${b.title} <br>`);
+                $('#listOfImages').append(`<strong>Description: </strong> ${b.description} <br>`);
+                $('#listOfImages').append(`<strong>Rating </strong> ${b.rating} <br> <hr>`);
             }
+        }).fail(function (er1, er2) {
+            console.log(er1);
+            console.log(er2);
+        });
+    }
+
+    $('form').submit(function(e){
+        //standard behaviour block
+        e.preventDefault();
+
+        //Get all data from form with jQuery
+        // $(this).serialize
+        // $(this).serializeArray()
+
+        console.log($('#titelinput').val());
+
+        let imageObject = {
+            title: $('#titelinput').val(),
+            description: $('#beschrijvinginput').val(),
+            rating: $('#ratinginput').val()
+        };
+
+        //Call to server
+        $.ajax({
+            url: 'http://127.0.0.1:3000/insertImage',
+            method: 'POST',
+            data: imageObject
+
+        }).done(function(data){
+            console.log('Image Inserted!');
+
+
         }).fail(function(er1, er2){
             console.log(er1);
             console.log(er2);
         });
-
-
-
-    }
+    });
 
 
 
