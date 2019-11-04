@@ -3,6 +3,8 @@ $(function () {
     //default setup
     let query;
     let apiKey = 'vHApl3PNFEFWHZJl9NQQrvQebSo80wBSoeECwncb';
+    let id;
+
     $('#home').show();
     $('form').hide();
     $('#listOfImages').hide();
@@ -50,8 +52,6 @@ $(function () {
                 console.log(er2);
             });
         });
-
-
     }
 
 
@@ -65,9 +65,17 @@ $(function () {
             console.log('DONE');
             $('#listOfImages').empty();
             for (let b of data) {
-                $('#listOfImages').append(`<strong>Titel: </strong> ${b.title} <br>`);
-                $('#listOfImages').append(`<strong>Description: </strong> ${b.description} <br>`);
-                $('#listOfImages').append(`<strong>Rating </strong> ${b.rating} <br> <hr>`);
+                // let div = `<div id="${b.title}"></div>`;
+                // $(div).append(`<strong>Titel: </strong> ${b.title} <br>`);
+                // $(div).append(`<strong>Description: </strong> ${b.description} <br>`);
+                // $(div).append(`<strong>Rating </strong> ${b.rating} <br>`);
+                // $(div).append(`<button id="delete ${id}">Delete</button> <br> <hr>`);
+                // $('#listOfImages').append(div);
+
+                $('#listOfImages').append(`<strong>Titel: </strong> ${b.title} <br>`)
+                .append(`<strong>Description: </strong> ${b.description} <br>`)
+                .append(`<strong>Rating </strong> ${b.rating} <br>`)
+                .append(`<button id="delete ${id}">Delete</button> <br> <hr>`);
             }
         }).fail(function (er1, er2) {
             console.log(er1);
@@ -75,13 +83,12 @@ $(function () {
         });
     }
 
+    //Saving objects to database
     $('form').submit(function (e) {
         //standard behaviour block
         e.preventDefault();
 
         //Get all data from form with jQuery
-        // $(this).serialize
-        // $(this).serializeArray()
 
         console.log($('#titelinput').val());
 
@@ -107,6 +114,11 @@ $(function () {
         });
     });
 
+
+    //Deleting objects from database
+    $('#delete ' + id).click(function () {
+        $(this).remove();
+    });
 
 
 });
