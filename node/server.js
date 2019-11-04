@@ -29,13 +29,13 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 
-//Localhost url
+//Localhost url (root)
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname + '/html/help.html'));
 });
 
-//GET getImages
-app.get('/getImages', (req, res) => {
+//GET /getImages
+app.get('/api/getSavedImages', (req, res) => {
     const db = client.db(dbName);
     const collection = db.collection('favo-images');
     collection.find({}).toArray(
@@ -46,6 +46,11 @@ app.get('/getImages', (req, res) => {
             }
         }
     );
+});
+
+//Obtject by id
+app.get('/api/getSavedImages/id', (req, res) => {
+
 });
 
 
@@ -89,21 +94,14 @@ const insertDocuments = function (db, callback) {
     });
 }
 
-app.post('/insertImage', (req, res) => {
+app.post('/api/insertImage', (req, res) => {
     console.log('insert triggered!');
     console.log(req.body);
-    
+
     const db = client.db(dbName);
     const collection = db.collection('favo-images');
 
     collection.insertMany([req.body]);
-    // // collection.find({}).toArray(
-    // //     [req.body.title, req.body.description, req.body.rating],
-    // //     function(err, results){
-    // //         console.log(results);
-    // //         console.log(err);
-    // //     }
-    // // );
     res.send('OK');
 });
 

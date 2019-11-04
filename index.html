@@ -1,51 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>CosmoSearch</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <script src="js/script.js"></script>
 </head>
+
 <body>
-<div class="container">
+    <div class="container">
 
-    <br>
-    <h2>CosmoSearch</h2>
-    <h5>Find your star!</h5>
-    <br>
-    <button type="button" class="btn btn-primary" id="list">List of Images</button>
-    <button type="button" class="btn btn-secondary" id="form">Insert Image Metadata</button>
-    <hr>
-    <form>
-        <div class="form-group">
-            <label for="titelinput">Title</label>
-            <input type="text" class="form-control" id="titelinput" name="titel">
-        </div>
-        <div class="form-group">
-            <label for="beschrijvinginput">Description</label>
-            <input type="text" class="form-control" id="beschrijvinginput" name="auteur">
-        </div>
-        <div class="form-group">
-            <label for="ratinginput">Rating</label>
-            <input type="number" class="form-control" id="ratinginput" name="rating" step=".1">
+        <br>
+        <h2>CosmoSearch</h2>
+        <h5>Find your star!</h5>
+        <br>
+        <button type="button" class="btn btn-primary" id="homeButton">Home</button>
+        <button type="button" class="btn btn-secondary" id="list">Saved Images</button>
+        <button type="button" class="btn btn-secondary" id="form">Insert Image Metadata</button>
+        <hr>
+
+        <div id="home">
+            <input class="form-control" id="search" type="text" placeholder="Search" aria-label="Search">
+            <div id="images">
+                <!--    images come here...-->
+            </div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+        <form>
+            <div class="form-group">
+                <label for="titelinput">Title</label>
+                <input type="text" class="form-control" id="titelinput" name="titel">
+            </div>
+            <div class="form-group">
+                <label for="beschrijvinginput">Description</label>
+                <input type="text" class="form-control" id="beschrijvinginput" name="auteur">
+            </div>
+            <div class="form-group">
+                <label for="ratinginput">Rating</label>
+                <input type="number" class="form-control" id="ratinginput" name="rating" step=".1">
+            </div>
 
-    <div id="listOfImages">
-<!--        list comes here...-->
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
 
+        <div id="listOfImages">
+            <!--    list comes here...-->
+
+        </div>
     </div>
-</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
 </body>
+
 </html>
