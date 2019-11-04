@@ -116,6 +116,7 @@ $(function () {
 
 
     //Deleting objects from database
+    //collection.deleteMany([]);
     $('#delete ' + id).click(function () {
         $(this).remove();
     });
