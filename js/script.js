@@ -2,7 +2,8 @@ $(function () {
     console.log('linked');
     //default setup
     let query;
-    let apiKey = 'vHApl3PNFEFWHZJl9NQQrvQebSo80wBSoeECwncb';
+    // let apiKey = 'rOvTXn3TqiyjQHhYyyFJH3m5Vv2td0hmbMquyE4y';
+    //no apiKey needed apparently
     let id;
 
     $('#home').show();
@@ -36,16 +37,20 @@ $(function () {
 
         $('#search').keyup(function () {
             query = $('#search').val();
+            console.log(query);
 
             $.ajax({
-                url: `https://images-api.nasa.gov/search?q=${query}&api_key=${apiKey}`,
+                url: `https://images-api.nasa.gov/search?q=${query}&media_type=image`,
                 method: 'GET',
                 dataType: 'json'
             }).done(function (data) {
                 console.log('DONE');
                 $('#images').empty();
-                for (let images of data) {
-                    $('#images').append(` ${images.collection.items.links.href} <br>`);
+                console.log(data);
+                console.log(data.collection.items.links);
+                for (let images of data.collection.items) {
+                    // console.log(images.links[0].href);
+                    $('#images').append(`<img src="${images.links[0].href}"> </img>`);
                 }
             }).fail(function (er1, er2) {
                 console.log(er1);
