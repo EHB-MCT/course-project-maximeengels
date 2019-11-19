@@ -27,6 +27,7 @@ $(function () {
     });
     $('#homeButton').click(function () {
         $('#home').show();
+        $('#images').empty();
         $('form').hide();
         $('#listOfImages').hide();
         getImages();
@@ -40,7 +41,7 @@ $(function () {
             console.log(query);
 
             $.ajax({
-                url: `https://images-api.nasa.gov/search?q=${query}&media_type=image`,
+                url: `https://images-api.nasa.gov/search?q=${query}`,
                 method: 'GET',
                 dataType: 'json'
             }).done(function (data) {
@@ -50,7 +51,7 @@ $(function () {
                 console.log(data.collection.items.links);
                 for (let images of data.collection.items) {
                     // console.log(images.links[0].href);
-                    $('#images').append(`<img src="${images.links[0].href}"> </img>`);
+                    $('#images').append(`<div class="img" style="background-image: url('${images.links[0].href}')"> </div>`);
                 }
             }).fail(function (er1, er2) {
                 console.log(er1);
@@ -121,7 +122,7 @@ $(function () {
 
 
     //Deleting objects from database
-    //collection.deleteMany([]);
+    //collection.deleteOne();
     $('#delete ' + id).click(function () {
         $(this).remove();
     });
