@@ -1,0 +1,39 @@
+
+
+#search {
+    margin: 0;
+    max-width: 1110px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    background-color: #F0EEEE;
+    /* font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5; */
+    border: 0;
+    color: #495057;
+  }
+  
+  #images {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    margin-top: 10vh;
+  }
+  
+  #images .img {
+    max-width: 32.4%;
+    width: 400px;
+    height: 400px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 5px 5px;
+  }

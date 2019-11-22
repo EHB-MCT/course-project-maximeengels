@@ -2,6 +2,7 @@ const express = require('express');
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 const bodyParser = require('body-parser');
+const ObjectId = require('mongodb').ObjectId;
 
 // Database connection setup
 const user = "MongoDBWeb2009";
@@ -48,7 +49,7 @@ app.get('/api/getSavedImages', (req, res) => {
     );
 });
 
-//Obtject by id
+//Object by id
 app.get('/api/getSavedImages/id', (req, res) => {
 
 });
@@ -104,6 +105,22 @@ app.post('/api/insertImage', (req, res) => {
     collection.insertMany([req.body]);
     res.send('OK');
 });
+
+//delete a specific favorite image
+app.post('/api/deleteImage', (req, res) => {
+    console.log('insert triggered!');
+    console.log(req.body);
+    console.log(req.query);
+    
+
+    const db = client.db(dbName);
+    const collection = db.collection('favo-images');
+        collection.deleteOne({
+            '_id' : ObjectId(req.body)
+        });
+        
+});
+
 
 
 app.listen(port, () => console.log(

@@ -4,13 +4,11 @@ $(function () {
     let query;
     // let apiKey = 'rOvTXn3TqiyjQHhYyyFJH3m5Vv2td0hmbMquyE4y';
     //no apiKey needed apparently
-    let id;
 
     $('#home').show();
     $('form').hide();
     $('#listOfImages').hide();
     getImages();
-    getList();
 
 
     //Eventlisteners voor buttons
@@ -70,19 +68,19 @@ $(function () {
         }).done(function (data) {
             console.log('DONE');
             $('#listOfImages').empty();
+        
             for (let b of data) {
-                // let div = `<div id="${b.title}"></div>`;
-                // $(div).append(`<strong>Titel: </strong> ${b.title} <br>`);
-                // $(div).append(`<strong>Description: </strong> ${b.description} <br>`);
-                // $(div).append(`<strong>Rating </strong> ${b.rating} <br>`);
-                // $(div).append(`<button id="delete ${id}">Delete</button> <br> <hr>`);
-                // $('#listOfImages').append(div);
-
-                $('#listOfImages').append(`<strong>Titel: </strong> ${b.title} <br>`)
+                let div = $('<div>', {
+                    class: "card",
+                    id: b._id
+                });
+                div.append(`<strong>Titel: </strong> ${b.title} <br>`)
                 .append(`<strong>Description: </strong> ${b.description} <br>`)
                 .append(`<strong>Rating </strong> ${b.rating} <br>`)
-                .append(`<button id="delete ${id}">Delete</button> <br> <hr>`);
+                .append(`<button class="delete" id="${b._id}"> Delete </button> <br> <hr>`);
+                $('#listOfImages').append(div);
             }
+
         }).fail(function (er1, er2) {
             console.log(er1);
             console.log(er2);
@@ -95,7 +93,6 @@ $(function () {
         e.preventDefault();
 
         //Get all data from form with jQuery
-
         console.log($('#titelinput').val());
 
         let imageObject = {
@@ -113,18 +110,31 @@ $(function () {
         }).done(function (data) {
             console.log('Image Inserted!');
 
-
         }).fail(function (er1, er2) {
             console.log(er1);
             console.log(er2);
         });
     });
 
+    //Updating objects from database
+    //collection.updateOne();
 
     //Deleting objects from database
-    //collection.deleteOne();
-    $('#delete ' + id).click(function () {
-        $(this).remove();
+    $('#listOfImages').on('click', '.delete', function () {
+        let imageId = $(this).attr('id');
+        console.log($(this).attr('id'));
+        $.ajax({
+            url: 'http://127.0.0.1:3000/api/deleteImage',
+            method: 'POST',
+            data: imageId
+
+        }).done(function (data) {
+            console.log('Image Inserted!');
+
+        }).fail(function (er1, er2) {
+            console.log(er1);
+            console.log(er2);
+        });
     });
 
 
