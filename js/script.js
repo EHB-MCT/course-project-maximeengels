@@ -46,7 +46,6 @@ $(function () {
                 console.log('DONE');
                 $('#images').empty();
                 console.log(data);
-                console.log(data.collection.items.links);
                 for (let images of data.collection.items) {
                     // console.log(images.links[0].href);
                     $('#images').append(`<div class="img" style="background-image: url('${images.links[0].href}')"> </div>`);
@@ -117,24 +116,42 @@ $(function () {
     });
 
     //Updating objects from database
-    //collection.updateOne();
-
-    //Deleting objects from database
     $('#listOfImages').on('click', '.delete', function () {
         let imageId = $(this).attr('id');
         console.log($(this).attr('id'));
         $.ajax({
-            url: 'http://127.0.0.1:3000/api/deleteImage',
-            method: 'POST',
-            data: imageId
+            url: `http://127.0.0.1:3000/api/updateImage`,
+            method: 'PUT'
 
-        }).done(function (data) {
+        }).done(function () {
             console.log('Image Inserted!');
 
         }).fail(function (er1, er2) {
             console.log(er1);
             console.log(er2);
         });
+        
+        //removes image from page
+        // $('#' + imageId).remove();
+    });
+
+    //Deleting objects from database
+    $('#listOfImages').on('click', '.delete', function () {
+        let imageId = $(this).attr('id');
+        console.log($(this).attr('id'));
+        $.ajax({
+            url: `http://127.0.0.1:3000/api/deleteImage/${imageId}`,
+            method: 'POST'
+
+        }).done(function () {
+            console.log('Image Inserted!');
+
+        }).fail(function (er1, er2) {
+            console.log(er1);
+            console.log(er2);
+        });
+        //removes image from page
+        $('#' + imageId).remove();
     });
 
 

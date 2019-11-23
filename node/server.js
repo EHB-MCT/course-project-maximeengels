@@ -107,20 +107,16 @@ app.post('/api/insertImage', (req, res) => {
 });
 
 //delete a specific favorite image
-app.post('/api/deleteImage', (req, res) => {
-    console.log('insert triggered!');
+app.post('/api/deleteImage/:id', (req, res) => {
+    console.log('delete triggered!');
     console.log(req.body);
     console.log(req.query);
-    
 
     const db = client.db(dbName);
     const collection = db.collection('favo-images');
-        collection.deleteOne({
-            '_id' : ObjectId(req.body)
-        });
-        
+    collection.deleteOne( {"_id": ObjectId(req.params.id)});
+    
 });
-
 
 
 app.listen(port, () => console.log(
