@@ -82,11 +82,9 @@ const insertDocuments = function (db, callback) {
     // Insert some documents
     collection.insertMany([{
         title: "Astronaut",
-        description: "A cool photo about an astronaut.",
         rating: 4
     }, {
         title: "Wormhole",
-        description: "Nice wormhole picture!",
         rating: 5
     }], function (err, result) {
         console.log("Inserted 2 documents into the collection");

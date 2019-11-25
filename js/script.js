@@ -69,15 +69,14 @@ $(function () {
             $('#listOfImages').empty();
         
             for (let b of data) {
-                let div = $('<div>', {
+                let savedImage = $('<div>', {
                     class: "card",
                     id: b._id
                 });
-                div.append(`<strong>Titel: </strong> ${b.title} <br>`)
-                .append(`<strong>Description: </strong> ${b.description} <br>`)
+                savedImage.append(`<strong>Titel: </strong> ${b.title} <br>`)
                 .append(`<strong>Rating </strong> ${b.rating} <br>`)
-                .append(`<button class="delete" id="${b._id}"> Delete </button> <br> <hr>`);
-                $('#listOfImages').append(div);
+                .append(`<button class="delete" id="${b._id}"> Delete </button> <br>`);
+                $('#listOfImages').append(savedImage);
             }
 
         }).fail(function (er1, er2) {

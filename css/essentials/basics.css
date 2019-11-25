@@ -1,5 +1,13 @@
 
 /* ================== Margins ==================== */
+html {
+  overflow-y: scroll;
+}
+
+body{
+  margin: 0;
+}
+
 .container{
     max-width: 1110px;
     width: 100%;
