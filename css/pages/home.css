@@ -1,4 +1,27 @@
 
+#home{
+  height: 100vh;
+}
+
+#landing{
+  background-image: url(/images/homeBackground.jpg);
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+}
+
+#title-center{
+  padding-top: 10%;
+  text-align: center;
+  color: #F0EEEE;
+}
+
+#title{
+  max-width: 40%;
+  height: auto;
+}
 
 #search {
     margin: 0;
@@ -24,8 +47,7 @@
   #images {
     display: flex;
     flex-wrap: wrap;
-    padding: 0;
-    margin-top: 10vh;
+    padding: 5vh 20vw 10vh;
   }
   
   #images .img {
