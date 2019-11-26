@@ -71,7 +71,7 @@ $(function () {
             for (let b of data) {
                 let savedImage = $('<div>', {
                     class: "card",
-                    id: b._id
+                    id: b._id       
                 });
                 savedImage.append(`<strong>Titel: </strong> ${b.title} <br>`)
                 .append(`<strong>Rating </strong> ${b.rating} <br>`)
@@ -153,5 +153,25 @@ $(function () {
         $('#' + imageId).remove();
     });
 
+
+    //========================================ANIMATIONS===================================================//
+
+    $("a").on('click', function(event) {
+
+        if (this.hash !== "") {
+          // Prevent default anchor click behavior
+          event.preventDefault();
+          var hash = this.hash;
+    
+          // Using jQuery's animate() method to add smooth page scroll
+          $('html, body').animate({
+            scrollTop: $(hash).offset().top
+          }, 800, function(){
+    
+            // Add hash (#) to URL when done scrolling (default click behavior)
+            window.location.hash = hash;
+          });
+        }
+      });
 
 });
