@@ -12,6 +12,7 @@ body{
     width: 100%;
     margin: 0;
     padding: 0;
+    position: relative;
   }
 
 
@@ -24,3 +25,13 @@ body{
 
 
   /* ================== Footer ==================== */
+
+  footer{
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    display: block;
+    height: 50px;
+  }

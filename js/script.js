@@ -5,31 +5,9 @@ $(function () {
     // let apiKey = 'rOvTXn3TqiyjQHhYyyFJH3m5Vv2td0hmbMquyE4y';
     //no apiKey needed apparently
 
-    $('#home').show();
     $('form').hide();
-    $('#listOfImages').hide();
+    $('.overlay').hide();
     getImages();
-
-
-    //Eventlisteners voor buttons
-    $('#list').click(function () {
-        $('#home').hide();
-        $('form').hide();
-        $('#listOfImages').show();
-        getList();
-    });
-    $('#form').click(function () {
-        $('#home').hide();
-        $('form').show();
-        $('#listOfImages').hide();
-    });
-    $('#homeButton').click(function () {
-        $('#home').show();
-        $('#images').empty();
-        $('form').hide();
-        $('#listOfImages').hide();
-        getImages();
-    });
 
 
     function getImages() {
@@ -67,15 +45,22 @@ $(function () {
         }).done(function (data) {
             console.log('DONE');
             $('#listOfImages').empty();
-        
-            for (let b of data) {
+
+            let overlayTitleDiv = $('<div>', {
+                id: "overlayTitle"
+            });
+            overlayTitleDiv.append(`<h1>Saved stars</h1>`)
+                .append(`<h2>A list of all your saved images.</h2>`);
+            $('#listOfImages').append(overlayTitleDiv);
+
+            for (let userSavedImg of data) {
                 let savedImage = $('<div>', {
                     class: "card",
-                    id: b._id       
+                    id: userSavedImg._id
                 });
-                savedImage.append(`<strong>Titel: </strong> ${b.title} <br>`)
-                .append(`<strong>Rating </strong> ${b.rating} <br>`)
-                .append(`<button class="delete" id="${b._id}"> Delete </button> <br>`);
+                savedImage.append(`<strong>Titel: </strong> ${userSavedImg.title} <br>`)
+                    .append(`<strong>Rating </strong> ${userSavedImg.rating} <br>`)
+                    .append(`<button class="delete" id="${userSavedImg._id}"> Delete </button> <br>`);
                 $('#listOfImages').append(savedImage);
             }
 
@@ -115,7 +100,7 @@ $(function () {
     });
 
     //Updating objects from database
-    $('#listOfImages').on('click', '.delete', function () {
+    $('#listOfImages').on('click', '.update', function () {
         let imageId = $(this).attr('id');
         console.log($(this).attr('id'));
         $.ajax({
@@ -129,7 +114,7 @@ $(function () {
             console.log(er1);
             console.log(er2);
         });
-        
+
         //removes image from page
         // $('#' + imageId).remove();
     });
@@ -154,24 +139,42 @@ $(function () {
     });
 
 
-    //========================================ANIMATIONS===================================================//
+    //========================================ANIMATIONS==========================================//
 
-    $("a").on('click', function(event) {
+    $("a").on('click', function (event) {
 
         if (this.hash !== "") {
-          // Prevent default anchor click behavior
-          event.preventDefault();
-          var hash = this.hash;
-    
-          // Using jQuery's animate() method to add smooth page scroll
-          $('html, body').animate({
-            scrollTop: $(hash).offset().top
-          }, 800, function(){
-    
-            // Add hash (#) to URL when done scrolling (default click behavior)
-            window.location.hash = hash;
-          });
+            event.preventDefault();
+            let hash = this.hash;
+
+            // Using jQuery's animate() method to add smooth page scroll
+            $('html, body').animate({
+                scrollTop: $(hash).offset().top
+            }, 800, function () {
+
+                // Add hash (#) to URL when done scrolling
+                window.location.hash = hash;
+            });
         }
-      });
+    });
+
+
+    //====================================================OVERLAY=========================================================//
+
+    $('#bookmark').click(function () {
+        getList();
+        document.getElementById("listOfImages").style.width = "500px";
+    });
+
+    $('#landing').click(function () {
+        document.getElementById("listOfImages").style.width = "0";
+    });
+
+
+
+    //=====================================AUDIO=====================================//
+
+    var audio = document.querySelector('audio');
+    audio.volume = .3;
 
 });
