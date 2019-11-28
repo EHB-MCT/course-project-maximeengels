@@ -29,7 +29,6 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 
-
 //Localhost url (root)
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname + '/html/help.html'));

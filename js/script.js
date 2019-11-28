@@ -6,7 +6,7 @@ $(function () {
     //no apiKey needed apparently
 
     $('form').hide();
-    $('.overlay').hide();
+    $('#images').hide();
     getImages();
 
 
@@ -16,22 +16,38 @@ $(function () {
             query = $('#search').val();
             console.log(query);
 
-            $.ajax({
-                url: `https://images-api.nasa.gov/search?q=${query}`,
-                method: 'GET',
-                dataType: 'json'
-            }).done(function (data) {
-                console.log('DONE');
-                $('#images').empty();
-                console.log(data);
-                for (let images of data.collection.items) {
-                    // console.log(images.links[0].href);
-                    $('#images').append(`<div class="img" style="background-image: url('${images.links[0].href}')"> </div>`);
-                }
-            }).fail(function (er1, er2) {
-                console.log(er1);
-                console.log(er2);
-            });
+            if (query == "") {
+                $('#images').fadeOut('slow');
+            } else {
+
+                $.ajax({
+                    url: `https://images-api.nasa.gov/search?q=${query}`,
+                    method: 'GET',
+                    dataType: 'json'
+                }).done(function (data) {
+                    console.log('DONE');
+                    $('#images').empty();
+                    console.log(data);
+                    let i = 1;
+                    for (let images of data.collection.items) {
+                        $('#images').append(`<div class="img" id="${i}" style="background-image: url('${images.links[0].href}')">
+                    <i class="far fa-bookmark bookmarkStyle" id="bookmark${i}"></i>
+                    <form id="form${i}">
+                    <input type="text" class="form-control" id="titelinput" name="titel">
+                    <input type="number" class="form-control" id="ratinginput" name="rating" step="1">
+                    </form>
+                    </div>`);
+                        i++;
+                    }
+                    $('#images i').hide();
+                    $('#images form').hide();
+                    $('#images').fadeIn('slow');
+
+                }).fail(function (er1, er2) {
+                    console.log(er1);
+                    console.log(er2);
+                });
+            }
         });
     }
 
@@ -44,24 +60,24 @@ $(function () {
             dataType: 'json'
         }).done(function (data) {
             console.log('DONE');
-            $('#listOfImages').empty();
+            $('#savedImages').empty();
 
             let overlayTitleDiv = $('<div>', {
                 id: "overlayTitle"
             });
             overlayTitleDiv.append(`<h1>Saved stars</h1>`)
                 .append(`<h2>A list of all your saved images.</h2>`);
-            $('#listOfImages').append(overlayTitleDiv);
+            $('#savedImages').append(overlayTitleDiv);
 
             for (let userSavedImg of data) {
                 let savedImage = $('<div>', {
                     class: "card",
                     id: userSavedImg._id
                 });
-                savedImage.append(`<strong>Titel: </strong> ${userSavedImg.title} <br>`)
-                    .append(`<strong>Rating </strong> ${userSavedImg.rating} <br>`)
+                savedImage.append(`${userSavedImg.title} <br>`)
+                    .append(`${userSavedImg.rating} <br>`)
                     .append(`<button class="delete" id="${userSavedImg._id}"> Delete </button> <br>`);
-                $('#listOfImages').append(savedImage);
+                $('#savedImages').append(savedImage);
             }
 
         }).fail(function (er1, er2) {
@@ -80,7 +96,6 @@ $(function () {
 
         let imageObject = {
             title: $('#titelinput').val(),
-            description: $('#beschrijvinginput').val(),
             rating: $('#ratinginput').val()
         };
 
@@ -100,8 +115,8 @@ $(function () {
     });
 
     //Updating objects from database
-    $('#listOfImages').on('click', '.update', function () {
-        let imageId = $(this).attr('id');
+    $('#savedImages').on('click', '.update', function () {
+        let savedImageId = $(this).attr('id');
         console.log($(this).attr('id'));
         $.ajax({
             url: `http://127.0.0.1:3000/api/updateImage`,
@@ -120,11 +135,10 @@ $(function () {
     });
 
     //Deleting objects from database
-    $('#listOfImages').on('click', '.delete', function () {
-        let imageId = $(this).attr('id');
-        console.log($(this).attr('id'));
+    $('#savedImages').on('click', '.delete', function () {
+        let savedImageId = $(this).attr('id');
         $.ajax({
-            url: `http://127.0.0.1:3000/api/deleteImage/${imageId}`,
+            url: `http://127.0.0.1:3000/api/deleteImage/${savedImageId}`,
             method: 'POST'
 
         }).done(function () {
@@ -135,16 +149,16 @@ $(function () {
             console.log(er2);
         });
         //removes image from page
-        $('#' + imageId).remove();
+        $('#' + savedImageId).remove();
     });
 
 
     //========================================ANIMATIONS==========================================//
 
-    $("a").on('click', function (event) {
-
+    //BACK-TO-TOP
+    $('a').on('click', function (e) {
         if (this.hash !== "") {
-            event.preventDefault();
+            e.preventDefault();
             let hash = this.hash;
 
             // Using jQuery's animate() method to add smooth page scroll
@@ -158,23 +172,43 @@ $(function () {
         }
     });
 
+    //IMAGES
+    $('#images').on('click', '.img', function () {
+        let imageId = $(this).attr('id');
+        console.log(imageId);
+        $('#images #bookmark' + imageId).fadeIn('150');
+        $('#images #form' + imageId).fadeIn('150');
+    });
+
+    //FORM
+    $('i').on('mouseenter', function () {
+        $('i').removeClass("far").addClass("fas");
+    });
+
+    $('.img .bookmarkStyle').on('click', function () {
+        let imageId = $(this).attr('id');
+        console.log('clicked this bookmark');
+        $('#images #form' + imageId).show();
+        // $('#images #form' + imageId).css("display", "true");
+    });
+
 
     //====================================================OVERLAY=========================================================//
 
-    $('#bookmark').click(function () {
+    $('#mainBookmark').click(function () {
         getList();
-        document.getElementById("listOfImages").style.width = "500px";
+        document.getElementById("savedImages").style.width = "50%";
     });
 
     $('#landing').click(function () {
-        document.getElementById("listOfImages").style.width = "0";
+        document.getElementById("savedImages").style.width = "0";
     });
 
 
 
     //=====================================AUDIO=====================================//
 
-    var audio = document.querySelector('audio');
-    audio.volume = .3;
+    // var audio = document.querySelector('audio');
+    // audio.volume = .3;
 
 });
