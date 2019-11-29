@@ -18,6 +18,8 @@ audio {
   display: inline-block;
 }
 
+/*==========ICONS==========*/
+
 #mainBookmark {
   font-size: 2em;
   float: right;
@@ -32,6 +34,25 @@ audio {
   font-size: 2.2em;
   color: rgb(170, 48, 32);
 }
+
+#infoIcon {
+  font-size: 1.7em;
+  position: fixed;
+  right: 0;
+  text-align: right;
+  color: #F6F6F6;
+  padding-right: 6vw;
+  top: 86.5vh;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+#infoIcon:hover {
+  font-size: 1.9em;
+  color: rgb(172, 172, 172);
+}
+
+/*================TITLE&SEARCH===============*/
 
 #title-center {
   padding-top: 22%;
@@ -72,7 +93,6 @@ audio {
   font-size: 0.8rem;
   font-weight: 400;
   line-height: 1;
-  font-style: oblique;
 }
 
 /*========================================IMAGES=======================================*/
@@ -82,15 +102,14 @@ audio {
   display: flex;
   flex-wrap: wrap;
   padding: 30vh 20vw 10vh;
-  /* background-image: url(/images/homeBackground2.jpg);
-    max-width: 100vw; */
   background: rgb(0, 0, 0);
-  background: linear-gradient(0deg, rgb(20, 20, 20) 20%, rgb(20, 20, 20) 79%, rgb(20, 20, 20) 87%, rgba(20, 20, 20, 0.959) 97%, rgba(20, 20, 20, 0.068) 99%);
+  background: linear-gradient(0deg, rgb(14, 14, 14) 20%, rgb(20, 20, 20) 79%, rgb(20, 20, 20) 87%, rgba(20, 20, 20, 0.979) 97%, rgba(20, 20, 20, 0.082) 99%);
 }
 
 #images .img {
   width: 290px;
   height: 290px;
+  z-index: 0;
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -98,34 +117,69 @@ audio {
   transition: 0.2s;
 }
 
-#images .img:hover {
-  /* opacity: 0.8; */
-  cursor: pointer;
-}
+/* #images .img:hover {
+  opacity: 0.8;
+} */
 
 /*=============BOOKMARK===============*/
 .bookmarkStyle {
   float: right;
   color: #E8422D;
   padding: 5%;
-  font-size: 1.2em;
-  z-index: 999;
+  font-size: 1.5em;
+  z-index: 2;
+  cursor: pointer;
+  position: relative;
 }
 
-/*=============FORM===============*/
+/*================FORM================*/
 .img form{
   padding: 70% 0 5% 0;
+  position: relative;
 }
 
 .img form input{
-  padding: 3% 0;
-  background: rgba(51, 51, 51, 0.356);
+  font-family: 'Lucida Sans Typewriter';
+  z-index: 5;
+  position: relative;
+  padding: 3% 5%;
+  margin-right: 2%;
+  color: #F6F6F6;
+  background: rgba(82, 82, 82, 0.356);
+  backdrop-filter: blur(12px);
   border: none;
   border-bottom: 1.5px solid #F6F6F6;
 }
 
-/*========================================BACK-TO-TOP=======================================*/
+.img form #ratinginput{
+  padding: 3% 10%;
+}
 
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.img form #submitButton{
+  z-index: 5;
+  font-family: 'Lucida Sans Typewriter';
+  padding: 3% 5%;
+  position: relative;
+  border: none;
+  color: #F6F6F6;
+  background: rgba(170, 170, 170, 0.356);
+  backdrop-filter: blur(12px);
+  transition: 0.3s;
+}
+
+.img form #submitButton:hover{
+  padding: 3% 6%;
+  cursor: pointer;
+  background: rgba(216, 216, 216, 0.356);
+}
+
+/*========================================BACK-TO-TOP=======================================*/
 .back-top {
   position: fixed;
   text-align: center;
@@ -136,18 +190,19 @@ audio {
   right: 0;
   top: -15.5px;
   margin: auto;
-  background: #a1a1a1de;
+  background: rgba(143, 143, 143, 0.52);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  backdrop-filter: blur(2px);
   color: #F6F6F6;
   -ms-transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
   cursor: pointer;
+  transition: 0.5s;
 }
 
 .back-top:hover {
-  transition: all .5s;
-  background: #7e7e7ede;
+  background: rgba(232, 67, 45, 0.863);
 }
 
 .back-top i {

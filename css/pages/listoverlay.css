@@ -7,36 +7,91 @@
   right: 0;
   overflow-x: hidden;
   transition: 0.5s;
-  padding-top: 60px;
+  padding-top: 8vh;
 
-  background-color: rgba(66, 66, 66, 0.404);
+  background-color: rgba(59, 59, 59, 0.404);
   backdrop-filter: blur(15px);
   box-shadow: 0 0 2rem 0 rgba(0, 0, 0, 0.322);
 
 }
 
+/*===========HEADER===========*/
+
 .overlay h1,
-.overlay h2,
-.card{
-  display: block;
+.overlay h2{
   text-align: right;
-  padding-right: 10%;
+  padding-right: 6vw;
 }
 
+.fa-times{
+  font-size: 2.2em;
+  float: right;
+  display: block;
+  color: #E8422D;
+  padding-right: 6vw;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.fa-times:hover{
+  font-size: 2.4em;
+  color: #aa3020;
+}
 .overlay h1{
   color: #F6F6F6;
   font-size: 40px;
-  margin-bottom: 0;
+  padding-top: 10vh;
+  margin: 0;
 }
 
 .overlay h2{
   color: rgb(199, 199, 199);
   font-size: 20px;
-  margin-bottom: 15%;
+  margin-bottom: 10vh;
+}
+
+/*===================SAVED IMAGES=====================*/
+
+#overlayImages{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5vh 0 15vh 5vw;
 }
 
 .card{
+  width: 231px;
+  height: 231px;
+  z-index: 0;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 5px 5px;
+
   color: #F6F6F6;
+  display: inline-block;
   font-family: 'Lucida Sans Typewriter';
-  font-style: oblique;
+  padding: 0%;
+}
+
+.card p{
+  margin: 7% 0;
+  padding: 0 8%;
+}
+
+.card .delete{
+  z-index: 5;
+  font-family: 'Lucida Sans Typewriter';
+  padding: 5% 6%;
+  position: relative;
+  border: none;
+  color: #F6F6F6;
+  background: rgba(126, 126, 126, 0.438);
+  backdrop-filter: blur(12px);
+  transition: 0.3s;
+}
+
+.card .delete:hover{
+  padding: 5% 8%;
+  cursor: pointer;
+  background: rgba(156, 156, 156, 0.397);
 }

@@ -30,15 +30,77 @@ $(function () {
                     console.log(data);
                     let i = 1;
                     for (let images of data.collection.items) {
-                        $('#images').append(`<div class="img" id="${i}" style="background-image: url('${images.links[0].href}')">
-                    <i class="far fa-bookmark bookmarkStyle" id="bookmark${i}"></i>
-                    <form id="form${i}">
-                    <input type="text" class="form-control" id="titelinput" name="titel">
-                    <input type="number" class="form-control" id="ratinginput" name="rating" step="1">
-                    </form>
-                    </div>`);
+                        let img = $('<div>', {
+                            class: "img",
+                            id: i,
+                            style: `background-image: url('${images.links[0].href}')`
+                        });
+                        img.append(`<i class="far fa-bookmark bookmarkStyle" id="bookmark${i}"></i>`);
+                        let form = $(`<form id="form${i}" action="#"></form>`)
+                            .append(`<input type="text" id="titelinput" name="titel" placeholder="title">`)
+                            .append(`<input type="number" id="ratinginput" name="rating" min="1" max="5" step="1" placeholder="1">`)
+                            .append(`<button type="submit" id="submitButton">Submit</button>`);
                         i++;
+                        img.append(form);
+                        $('#images').append(img);
                     }
+
+                    //Saving objects to database
+                    $('#submitButton').click(function (e) {
+                        //standard behaviour block
+                        console.log("submit");
+                        e.preventDefault();
+
+                        //Get all data from form with jQuery
+                        console.log($('#titelinput').val());
+                        var bg = $(this).parent('form').parent('.img').css('background-image');
+
+                        let imageObject = {
+                            title: $('#titelinput').val(),
+                            rating: $('#ratinginput').val(),
+                            href: bg
+                        };
+
+                        //Call to server
+                        $.ajax({
+                            url: 'http://127.0.0.1:3000/api/insertImage',
+                            method: 'POST',
+                            data: imageObject
+
+                        }).done(function (data) {
+                            console.log('Image Inserted!');
+
+                        }).fail(function (er1, er2) {
+                            console.log(er1);
+                            console.log(er2);
+                        });
+                    });
+
+                    //========================================ANIMATIONS============================================//
+                    //IMAGES
+                    $('.img').on('mouseenter', function () {
+                        let imageId = $(this).attr('id');
+                        let bookmark = $('#images #bookmark' + imageId);
+                        $(bookmark).fadeIn('fast');
+
+                        $(bookmark).on('click', function () {
+                            $('#form' + imageId).fadeIn('fast');
+                            if ($(bookmark).hasClass('far')) {
+                                $(bookmark).removeClass("far").addClass("fas");
+                            } else if ($(bookmark).hasClass('fas')) {
+                                $(bookmark).removeClass("fas").addClass("far");
+                            }
+                        });
+                    });
+
+                    $('.img').on('mouseleave', function () {
+                        let imageId = $(this).attr('id');
+                        let bookmark = $('#images #bookmark' + imageId);
+                        $(bookmark).fadeOut('fast');
+                        $('#form' + imageId).fadeOut('fast');
+                        $(bookmark).removeClass("fas").addClass("far");
+                    });
+
                     $('#images i').hide();
                     $('#images form').hide();
                     $('#images').fadeIn('slow');
@@ -52,6 +114,7 @@ $(function () {
     }
 
 
+    //=======================================OVERLAY===============================================//
     function getList() {
 
         $.ajax({
@@ -62,23 +125,30 @@ $(function () {
             console.log('DONE');
             $('#savedImages').empty();
 
+            let overlayImageDiv = $('<div>', {
+                id: "overlayImages"
+            });
             let overlayTitleDiv = $('<div>', {
                 id: "overlayTitle"
             });
-            overlayTitleDiv.append(`<h1>Saved stars</h1>`)
+
+            overlayTitleDiv.append(`<i class="fas fa-times"></i>`)
+                .append(`<h1>Saved stars</h1>`)
                 .append(`<h2>A list of all your saved images.</h2>`);
             $('#savedImages').append(overlayTitleDiv);
 
             for (let userSavedImg of data) {
                 let savedImage = $('<div>', {
                     class: "card",
-                    id: userSavedImg._id
+                    id: userSavedImg._id,
+                    style: `background-image: ${userSavedImg.href}`
                 });
-                savedImage.append(`${userSavedImg.title} <br>`)
-                    .append(`${userSavedImg.rating} <br>`)
-                    .append(`<button class="delete" id="${userSavedImg._id}"> Delete </button> <br>`);
-                $('#savedImages').append(savedImage);
+                savedImage.append(`<p>${userSavedImg.title}</p>`)
+                    .append(`<p>${userSavedImg.rating}</p>`)
+                    .append(`<button class="delete" id="${userSavedImg._id}"> Delete </button>`);
+                    overlayImageDiv.append(savedImage);
             }
+            $('#savedImages').append(overlayImageDiv);
 
         }).fail(function (er1, er2) {
             console.log(er1);
@@ -86,33 +156,7 @@ $(function () {
         });
     }
 
-    //Saving objects to database
-    $('form').submit(function (e) {
-        //standard behaviour block
-        e.preventDefault();
 
-        //Get all data from form with jQuery
-        console.log($('#titelinput').val());
-
-        let imageObject = {
-            title: $('#titelinput').val(),
-            rating: $('#ratinginput').val()
-        };
-
-        //Call to server
-        $.ajax({
-            url: 'http://127.0.0.1:3000/api/insertImage',
-            method: 'POST',
-            data: imageObject
-
-        }).done(function (data) {
-            console.log('Image Inserted!');
-
-        }).fail(function (er1, er2) {
-            console.log(er1);
-            console.log(er2);
-        });
-    });
 
     //Updating objects from database
     $('#savedImages').on('click', '.update', function () {
@@ -172,32 +216,15 @@ $(function () {
         }
     });
 
-    //IMAGES
-    $('#images').on('click', '.img', function () {
-        let imageId = $(this).attr('id');
-        console.log(imageId);
-        $('#images #bookmark' + imageId).fadeIn('150');
-        $('#images #form' + imageId).fadeIn('150');
-    });
-
-    //FORM
-    $('i').on('mouseenter', function () {
-        $('i').removeClass("far").addClass("fas");
-    });
-
-    $('.img .bookmarkStyle').on('click', function () {
-        let imageId = $(this).attr('id');
-        console.log('clicked this bookmark');
-        $('#images #form' + imageId).show();
-        // $('#images #form' + imageId).css("display", "true");
-    });
-
-
-    //====================================================OVERLAY=========================================================//
+    //OVERLAY ANIMATIONS
 
     $('#mainBookmark').click(function () {
         getList();
-        document.getElementById("savedImages").style.width = "50%";
+        document.getElementById("savedImages").style.width = "60%";
+    });
+
+    $('#savedImages').on('click', '.fa-times', function () {
+        document.getElementById("savedImages").style.width = "0";
     });
 
     $('#landing').click(function () {
