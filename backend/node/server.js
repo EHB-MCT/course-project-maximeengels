@@ -53,44 +53,44 @@ app.get('/api/getSavedImages/id', (req, res) => {
 
 });
 
-
+//Connection to db
 client.connect(function (err) {
     assert.equal(null, err);
     console.log("Connected successfully to server");
     const db = client.db(dbName);
-    insertDocuments(db, function () {
-        const findDocuments = function (db, callback) {
-            // Get the documents collection
-            const collection = db.collection('favo-images');
-            // Find some documents
-            collection.find({}).toArray(function (err, docs) {
-                assert.equal(err, null);
-                console.log("Found the following records");
-                console.log(docs)
-                callback(docs);
-            });
-            client.close();
-        }
-    });
+    // insertDocuments(db, function () {
+    //     const findDocuments = function (db, callback) {
+    //         // Get the documents collection
+    //         const collection = db.collection('favo-images');
+    //         // Find some documents
+    //         collection.find({}).toArray(function (err, docs) {
+    //             assert.equal(err, null);
+    //             console.log("Found the following records");
+    //             console.log(docs)
+    //             callback(docs);
+    //         });
+    //         client.close();
+    //     }
+    // });
 });
 
 
-const insertDocuments = function (db, callback) {
-    // Get the documents collection
-    const collection = db.collection('favo-images');
-    // Insert some documents
-    collection.insertMany([{
-        title: "Astronaut",
-        rating: 4
-    }, {
-        title: "Wormhole",
-        rating: 5
-    }], function (err, result) {
-        console.log("Inserted 2 documents into the collection");
-        console.log(result);
-        callback(result);
-    });
-}
+// const insertDocuments = function (db, callback) {
+//     // Get the documents collection
+//     const collection = db.collection('favo-images');
+//     // Insert some documents
+//     collection.insertMany([{
+//         title: "Astronaut",
+//         rating: 4
+//     }, {
+//         title: "Wormhole",
+//         rating: 5
+//     }], function (err, result) {
+//         console.log("Inserted 2 documents into the collection");
+//         console.log(result);
+//         callback(result);
+//     });
+// }
 
 app.post('/api/insertImage', (req, res) => {
     console.log('insert triggered!');
