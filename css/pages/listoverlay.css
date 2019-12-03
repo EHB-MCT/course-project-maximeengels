@@ -47,7 +47,7 @@
 .overlay h2{
   color: rgb(199, 199, 199);
   font-size: 20px;
-  margin-bottom: 10vh;
+  margin-bottom: 5vh;
 }
 
 /*===================SAVED IMAGES=====================*/
@@ -76,6 +76,7 @@
 .card p{
   margin: 7% 0;
   padding: 0 8%;
+  text-shadow: 4px 3px 4px rgba(84, 82, 86, 1);
 }
 
 .card .delete{

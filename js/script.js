@@ -37,8 +37,8 @@ $(function () {
                         });
                         img.append(`<i class="far fa-bookmark bookmarkStyle" id="bookmark${i}"></i>`);
                         let form = $(`<form id="form${i}" action="#"></form>`)
-                            .append(`<input type="text" id="titelinput" name="titel" placeholder="title">`)
-                            .append(`<input type="number" id="ratinginput" name="rating" min="1" max="5" step="1" placeholder="1">`)
+                            .append(`<input type="text" id="titelinput${i}" name="titel" placeholder="title">`)
+                            .append(`<input type="number" id="ratinginput${i}" name="rating" min="1" max="5" step="1" placeholder="1">`)
                             .append(`<button type="submit" id="submitButton">Submit</button>`);
                         i++;
                         img.append(form);
@@ -46,18 +46,18 @@ $(function () {
                     }
 
                     //Saving objects to database
-                    $('#submitButton').click(function (e) {
+                    $('form #submitButton').click(function (e) {
                         //standard behaviour block
                         console.log("submit");
                         e.preventDefault();
 
                         //Get all data from form with jQuery
                         console.log($('#titelinput').val());
-                        var bg = $(this).parent('form').parent('.img').css('background-image');
-
+                        let bg = $(this).parent('form').parent('.img').css('background-image');
+                        let formId = $(this).parent('form').parent('.img').attr('id');
                         let imageObject = {
-                            title: $('#titelinput').val(),
-                            rating: $('#ratinginput').val(),
+                            title: $('#titelinput' + formId).val(),
+                            rating: $('#ratinginput' + formId).val(),
                             href: bg
                         };
 
@@ -193,7 +193,7 @@ $(function () {
             console.log(er2);
         });
         //removes image from page
-        $('#' + savedImageId).remove();
+        $('#' + savedImageId).fadeOut();
     });
 
 
@@ -231,11 +231,15 @@ $(function () {
         document.getElementById("savedImages").style.width = "0";
     });
 
+    $('.card').on('mouseenter', function () {
+        let cardId = $(this).attr('id');
+        $(cardId).fadeIn('fast');
+    });
 
 
     //=====================================AUDIO=====================================//
 
-    // var audio = document.querySelector('audio');
-    // audio.volume = .3;
+    var audio = document.querySelector('audio');
+    audio.volume = .2;
 
 });

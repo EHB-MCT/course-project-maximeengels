@@ -112,9 +112,7 @@ app.post('/api/deleteImage/:id', (req, res) => {
     const db = client.db(dbName);
     const collection = db.collection('favo-images');
     collection.deleteOne( {"_id": ObjectId(req.params.id)});
-    
 });
-
 
 app.listen(port, () => console.log(
     `MY App listening on port ${port}!`));
