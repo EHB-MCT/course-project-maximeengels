@@ -1,32 +1,29 @@
-
-
 h1 {
-    font-family: "Book Antiqua", serif;
-    font-weight: bold;
-  }
-  
+  font-family: "Book Antiqua", serif;
+  font-weight: bold;
+  color: #F6F6F6;
+  font-size: 40px;
+  padding-top: 10vh;
+  margin: 0;
+}
+
 h2 {
-    font-family: "Book Antiqua", serif;
-    font-weight: normal;
-    color: #F6F6F6;
-  }
+  font-family: "Book Antiqua", serif;
+  font-weight: normal;
+  color: rgb(199, 199, 199);
+  font-size: 25px;
+  margin-top: 1vh;
+  margin-bottom: 5vh;
+}
 
-  footer p, footer #about{
-    font-family: "Book Antiqua", serif;
-  }
+.aboutText p {
+  font-family: 'Lucida Sans Typewriter';
+  font-size: 1em;
+  font-style: oblique;
+  color: rgb(255, 74, 50);
+}
 
-  footer #about{
-    font-size: 20px;
-    text-decoration: none;
-    color: #212121;
-    font-weight: bold;
-    transition: 0.5s;
-  }
-
-  footer #about:hover{
-    color: #E8422D;
-  }
-
-  footer p{
-    font-size: 15px;
-  }
+.aboutText ul {
+  font-family: 'Lucida Sans Typewriter';
+  font-size: 1em;
+}

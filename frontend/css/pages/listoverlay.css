@@ -18,12 +18,12 @@
 /*===========HEADER===========*/
 
 .overlay h1,
-.overlay h2{
+.overlay h2 {
   text-align: right;
   padding-right: 6vw;
 }
 
-.fa-times{
+.fa-times {
   font-size: 2.2em;
   float: right;
   display: block;
@@ -33,18 +33,19 @@
   cursor: pointer;
 }
 
-.fa-times:hover{
+.fa-times:hover {
   font-size: 2.4em;
   color: #aa3020;
 }
-.overlay h1{
+
+.overlay h1 {
   color: #F6F6F6;
   font-size: 40px;
   padding-top: 10vh;
   margin: 0;
 }
 
-.overlay h2{
+.overlay h2 {
   color: rgb(199, 199, 199);
   font-size: 20px;
   margin-bottom: 5vh;
@@ -52,13 +53,13 @@
 
 /*===================SAVED IMAGES=====================*/
 
-#overlayImages{
+#overlayImages {
   display: flex;
   flex-wrap: wrap;
   padding: 5vh 0 15vh 5vw;
 }
 
-.card{
+.card {
   width: 231px;
   height: 231px;
   z-index: 0;
@@ -73,13 +74,13 @@
   padding: 0%;
 }
 
-.card p{
+.card p {
   margin: 7% 0;
   padding: 0 8%;
   text-shadow: 4px 3px 4px rgba(84, 82, 86, 1);
 }
 
-.card .delete{
+.card .delete {
   z-index: 5;
   font-family: 'Lucida Sans Typewriter';
   padding: 5% 6%;
@@ -91,7 +92,7 @@
   transition: 0.3s;
 }
 
-.card .delete:hover{
+.card .delete:hover {
   padding: 5% 8%;
   cursor: pointer;
   background: rgba(156, 156, 156, 0.397);

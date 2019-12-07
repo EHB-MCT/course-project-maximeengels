@@ -10,20 +10,25 @@
   background-size: cover;
 }
 
-audio {
-  background-color: transparent;
-  padding-left: 6vw;
-  padding-top: 8vh;
-  width: 18%;
-  display: inline-block;
-}
-
 /*==========ICONS==========*/
 
+/*=====BOOKMARK=====*/
+.bookmarkStyle {
+  float: right;
+  color: #E8422D;
+  padding: 5%;
+  font-size: 1.5em;
+  z-index: 2;
+  cursor: pointer;
+  position: relative;
+}
+
 #mainBookmark {
+  position: fixed;
   font-size: 2em;
   float: right;
   color: #E8422D;
+  right: 0;
   padding-right: 6vw;
   padding-top: 8vh;
   transition: 0.3s;
@@ -34,6 +39,8 @@ audio {
   font-size: 2.2em;
   color: rgb(170, 48, 32);
 }
+
+/*====ABOUT ICON====*/
 
 #infoIcon {
   font-size: 1.7em;
@@ -121,24 +128,13 @@ audio {
   opacity: 0.8;
 } */
 
-/*=============BOOKMARK===============*/
-.bookmarkStyle {
-  float: right;
-  color: #E8422D;
-  padding: 5%;
-  font-size: 1.5em;
-  z-index: 2;
-  cursor: pointer;
-  position: relative;
-}
-
 /*================FORM================*/
-.img form{
+.img form {
   padding: 70% 0 5% 0;
   position: relative;
 }
 
-.img form input{
+.img form input {
   font-family: 'Lucida Sans Typewriter';
   z-index: 5;
   position: relative;
@@ -151,17 +147,34 @@ audio {
   border-bottom: 1.5px solid #F6F6F6;
 }
 
-.img form #ratinginput{
+.img form #ratinginput {
   padding: 3% 10%;
 }
 
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgba(22, 22, 22, 0.603);
+  opacity: 1;
+  /* Firefox */
 }
 
-.img form #submitButton{
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: rgba(22, 22, 22, 0.603);
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: rgba(22, 22, 22, 0.603);
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.img form #submitButton {
   z-index: 5;
   font-family: 'Lucida Sans Typewriter';
   padding: 3% 5%;
@@ -173,7 +186,7 @@ input[type=number]::-webkit-outer-spin-button {
   transition: 0.3s;
 }
 
-.img form #submitButton:hover{
+.img form #submitButton:hover {
   padding: 3% 6%;
   cursor: pointer;
   background: rgba(216, 216, 216, 0.356);

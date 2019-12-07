@@ -1,7 +1,43 @@
-.wrapper {
-    background-image: url(/frontend/images/aboutBackground.jpg);
-    height: 100vh;
-    background-position: center;
-    background-repeat: no-repeat;
+.aboutwrapper {
+    min-height: 100vh;
+    background: url(/frontend/images/aboutBackground.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover;
+}
+
+.aboutText {
+    margin: 0;
+    padding: 16vh 5vw 16vh 55vw;
+    color: #F6F6F6;
+
+}
+
+section {
+    padding: 0 5vw 10vh;
+    background-color: rgba(59, 59, 59, 0.507);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 0 2rem 0 rgba(0, 0, 0, 0.322);
+}
+
+li {
+    padding: 1vh 0;
+}
+
+.fa-rocket{
+    font-size: 2em;
+    position: fixed;
+    left: 0;
+    text-align: right;
+    color: #E8422D;
+    padding-right: 6vw;
+    top: 8vh;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.fa-rocket:hover{
+    font-size: 2.2em;
+    color: rgb(170, 48, 32);
 }

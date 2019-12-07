@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,14 +10,39 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/953138ac65.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-    <div class="wrapper">
-        <div id="aboutTitle">
-            <h1>Behind the scene's</h1>
-            <h2>The underlying work and sources used.</h2>
-            <p>Here is an overview of all the sources I've used to create this website.</p>
+    <div class="aboutwrapper">
+        <a href="index.html">
+            <i class="fas fa-rocket fa-flip-horizontal"></i>
+        </a>
+        <div class="aboutText">
+            <section>
+                <h1>Behind the scene's</h1>
+                <h2>The underlying work and sources used.</h2>
+
+                <p>A list of all the features I've added:</p>
+                <ul>
+                    <li>Getting API images based on query from searchinput.</li>
+                    <li>Show form when hovering over image. The title, rating and image will be send and stored to
+                        database. (Saving linked data)</li>
+                    <li>Multiple css animations: back-to-top, submit button, overlay sliding to the left.</li>
+                    <li>Overlay shows saved images using flexbox with title and rating by retrieving them from database.
+                    </li>
+                    <li>Complete design integrated and improved.</li>
+                </ul>
+                <br>
+                <p>A list of all sources I've used:</p>
+                <ul>
+                    <li>W3schools</li>
+                    <li>CSS-tricks</li>
+                    <li>Font Awesome Icons</li>
+                    <li>Backend tutorial presented in the course.</li>
+                </ul>
+            </section>
         </div>
     </div>
     <script src="./js/script.js"></script>
 </body>
+
 </html>

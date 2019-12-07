@@ -1,5 +1,4 @@
 $(function () {
-    console.log('linked');
     //default setup
     let query;
     // let apiKey = 'rOvTXn3TqiyjQHhYyyFJH3m5Vv2td0hmbMquyE4y';
@@ -14,7 +13,6 @@ $(function () {
 
         $('#search').keyup(function () {
             query = $('#search').val();
-            console.log(query);
 
             if (query == "") {
                 $('#images').fadeOut('slow');
@@ -25,9 +23,7 @@ $(function () {
                     method: 'GET',
                     dataType: 'json'
                 }).done(function (data) {
-                    console.log('DONE');
                     $('#images').empty();
-                    console.log(data);
                     let i = 1;
                     for (let images of data.collection.items) {
                         let img = $('<div>', {
@@ -48,11 +44,9 @@ $(function () {
                     //Saving objects to database
                     $('form #submitButton').click(function (e) {
                         //standard behaviour block
-                        console.log("submit");
                         e.preventDefault();
-
+                        
                         //Get all data from form with jQuery
-                        console.log($('#titelinput').val());
                         let bg = $(this).parent('form').parent('.img').css('background-image');
                         let formId = $(this).parent('form').parent('.img').attr('id');
                         let imageObject = {
@@ -69,7 +63,8 @@ $(function () {
 
                         }).done(function (data) {
                             console.log('Image Inserted!');
-
+                            $('#mainBookmark').fadeOut('slow');
+                            $('#mainBookmark').fadeIn('slow');
                         }).fail(function (er1, er2) {
                             console.log(er1);
                             console.log(er2);
@@ -146,7 +141,7 @@ $(function () {
                 savedImage.append(`<p>${userSavedImg.title}</p>`)
                     .append(`<p>${userSavedImg.rating}</p>`)
                     .append(`<button class="delete" id="${userSavedImg._id}"> Delete </button>`);
-                    overlayImageDiv.append(savedImage);
+                overlayImageDiv.append(savedImage);
             }
             $('#savedImages').append(overlayImageDiv);
 

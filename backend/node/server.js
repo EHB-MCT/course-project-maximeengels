@@ -74,6 +74,7 @@ client.connect(function (err) {
     // });
 });
 
+//====================HARDCODED OBJECTS========================//
 
 // const insertDocuments = function (db, callback) {
 //     // Get the documents collection
@@ -111,7 +112,9 @@ app.post('/api/deleteImage/:id', (req, res) => {
 
     const db = client.db(dbName);
     const collection = db.collection('favo-images');
-    collection.deleteOne( {"_id": ObjectId(req.params.id)});
+    collection.deleteOne({
+        "_id": ObjectId(req.params.id)
+    });
 });
 
 app.listen(port, () => console.log(
