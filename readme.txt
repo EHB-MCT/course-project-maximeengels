@@ -1,5 +1,5 @@
 
-I styled my site using a screen size of 1500 x 864 so in order to see it how I meant it to be seen, please change your viewport size.
+I styled my site using a screen size of 1500 x 864.
 Feel free to mute the background audio by rightclicking your browser tab and muting the site.
 
 SETUP:
