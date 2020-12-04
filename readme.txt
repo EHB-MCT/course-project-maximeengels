@@ -13,3 +13,5 @@ SETUP:
 4. Type "node server.js" to start a local server and make a connection with MongoDB.
 
 5. If you followed these steps correctly and changed your viewport size to 1500 x 864 you can launch the site in your browser.
+
+.
